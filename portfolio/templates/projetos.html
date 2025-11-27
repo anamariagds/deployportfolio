@@ -9,12 +9,13 @@
         <p>Aqui estão alguns dos projetos que desenvolvi. Clique em um projeto para ver mais detalhes.</p>
         
         <ul class="project-list">
-            {% for nome, dados in projetos.items %}
+            {% for projeto in projetos %}
                 <li class="project-item">
-                    <a href="{% url 'detalhes_projeto' id_projeto=nome %}">{{ dados.titulo }}</a>
+                    <a href="{% url 'detalhes_projeto' id_projeto=projeto.id %}">{{ projeto.titulo }}</a>
                 </li>
             {% endfor %}
         </ul>
     </section>
 {% endblock %}
+
 

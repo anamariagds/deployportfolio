@@ -22,8 +22,8 @@
     <section class="skills-section">
         <h2>Habilidades</h2>
         <ul class="skills-list">
-            {% for nome, dados in habilidades.items %}
-                <li class="skill-item" >{{ dados.nome }}</li>
+            {% for habilidade in habilidades %}
+                <li class="skill-item" >{{ habilidade.nome }}</li>
             {% endfor %}
         </ul>
     </section>
