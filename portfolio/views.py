@@ -7,9 +7,34 @@ from django.conf import settings
 from django.contrib import messages
 
 # Create your views here.
+# def home(request):
+#     habilidades = Habilidade.objects.all()
+#     return render(request, 'home.html', {'habilidades': habilidades})
 def home(request):
+    if request.method == 'POST':
+        form = ContatoForm(request.POST)
+        if form.is_valid():
+            nome = form.cleaned_data['nome']
+            email = form.cleaned_data['email']
+            assunto = form.cleaned_data['assunto']
+            mensagem = form.cleaned_data['mensagem']
+
+            corpo_email = f"Mensagem de {nome} <{email}>:\n\n{mensagem}"
+
+            email_obj = EmailMessage(
+                subject= assunto,
+                body= corpo_email,
+                from_email= settings.DEFAULT_FROM_EMAIL,
+                to=[settings.DEFAULT_FROM_EMAIL],
+                reply_to=[email]
+            )
+            email_obj.send()
+            messages.success(request, "Email enviado com sucesso!")
+            return redirect('home')
+    else:
+         form = ContatoForm()
     habilidades = Habilidade.objects.all()
-    return render(request, 'home.html', {'habilidades': habilidades})
+    return render(request, 'home.html', {'habilidades': habilidades, 'form': form})
 def lista_projetos(request):
     projetos = Projeto.objects.all()
     return render(request, 'projetos.html', {'projetos': projetos})
