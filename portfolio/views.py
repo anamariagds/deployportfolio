@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 #from .dados import habilidades, projetos
 from .models import Habilidade, Projeto
-#from .forms import ContatoForm
+from .forms import ContatoForm
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.contrib import messages
